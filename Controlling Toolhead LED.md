@@ -7,12 +7,10 @@ This guide explains how to gain full control over the toolhead LED by bypassing 
     Before starting, confirm which pin controls your LED. While **GPIO 79** is standard for most X4 units, yours might differ.
 
     1. **Connect via SSH** (User: `mks`, Pass: `makerbase`).
-    2. **Run the Monitor Command**:
-   
-    ```bash
-    watch -n 0.5 "cat /sys/class/gpio/gpio*/value"
-    ```
-    
+    2. **Run the Monitor Command**:   
+        ```bash
+        watch -n 0.5 "cat /sys/class/gpio/gpio*/value"
+        ```    
     3. **Toggle the LED**: Use the printer's physical touch screen to turn the light ON/OFF.
 
     Note the result: Identify the GPIO number that flips between `0` and `1` (standard is **79**).
@@ -55,8 +53,7 @@ This guide explains how to gain full control over the toolhead LED by bypassing 
 4. ⚙️ **Klipper Configuration** (printer.cfg)
     Add these macros to your configuration.
 
-    [!IMPORTANT] You MUST remove or comment out any existing [output_pin] sections in your printer.cfg that use the same GPIO pin to avoid startup crashes.    
-
+    > [!IMPORTANT] You MUST remove or comment out any existing [output_pin] sections in your printer.cfg that use the same GPIO pin to avoid startup crashes.    
     ```YAML
     [gcode_shell_command set_led]
     command: /home/mks/led_control.sh
@@ -72,9 +69,4 @@ This guide explains how to gain full control over the toolhead LED by bypassing 
         RUN_SHELL_COMMAND CMD=set_led PARAMS=0
     ```
 
-    **[!IMPORTANT**] Remove or comment out any existing `[output_pin]` sections in your printer.cfg that use the same GPIO pin to avoid startup crashes.
-
-    
-description: Turn off toolhead LED
-gcode:
-    RUN_SHELL_COMMAND CMD=set_led PARAMS=0
+ 
