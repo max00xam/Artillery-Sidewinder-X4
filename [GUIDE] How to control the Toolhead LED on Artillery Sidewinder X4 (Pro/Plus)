@@ -1,0 +1,13 @@
+# 💡 Controlling Toolhead LED on Artillery Sidewinder X4 via MKS PI GPIO
+
+This guide explains how to gain full control over the toolhead LED by bypassing internal MCU limitations and using the MKS PI host GPIOs directly. 
+
+---
+
+## 🔍 1. Identify Your GPIO Pin
+Before starting, confirm which pin controls your LED. While **GPIO 79** is standard for most X4 units, yours might differ.
+
+1. **Connect via SSH** (User: `mks`, Pass: `makerbase`).
+2. **Run the Monitor Command**:
+   ```bash
+   watch -n 0.5 "cat /sys/class/gpio/gpio*/value"
